@@ -29,6 +29,7 @@ Route::post('/login', [LoginController::class,'store']);
 Route::get('/register', [RegisterController::class,'index'])->name('register'); // ->name('register') nome/apontador dadoa register 
 Route::post('/register', [RegisterController::class,'store']);  // herda o nome apontado para esta rota antes , só muda o metodo
 
+Route::get('/posts/search', [PostController::class,'search'])->name('posts.search'); 
 Route::get('/posts', [PostController::class,'index'])->name('posts'); 
 Route::get('/posts/{post}', [PostController::class,'show'])->name('posts.show'); 
 Route::post('/posts', [PostController::class,'store']);

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Posty</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- The files must located in the public folder -->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- The files must located in the public folder -->      
     </head>
     <body class="bg-gray-200">
         <nav class="p-6 bg-white flex justify-between mb-6">
@@ -20,8 +20,18 @@
                     <a href="{{ route('posts') }}" class="p-3">Post</a>
                 </li>
             </ul>
+            
+            <div>
+                <form action="{{ route('posts.search') }}" method="get">
+                    
+                    <label for="search" class="sr-only">Search</label>
 
-            <ul class="flex items-center">
+                    <input type="text" name="search" id="search" placeholder="Search for a post or user..."
+                    class="bg-gray-100 border-2 w-full p-2.5 rounded-lg" @if ($errors->has('search')) value="" @else value="{{ request('search') }}" @endif>
+                </form>   
+            </div> 
+
+             <ul class="flex items-center">
                 @auth {{-- @if (auth()->user()) --}}
                     <li>
                         <a href="" class="p-3">{{ auth()->user()->name }}</a> {{-- return  'user' obj->name --}}
@@ -44,6 +54,18 @@
                 @endguest  {{-- @endif --}} 
             </ul>
         </nav>
-        @yield('content')
+        
+        @if ($errors->has('search'))    {{-- receive error message from search --}}
+            <div id="app">
+                <modal-component>
+                    @error('search')
+                        {{ $message }} 
+                    @enderror
+                 </modal-component>
+            </div>
+        @endif 
+
+        @yield('content')   
     </body>
+    <script src="{{ asset('js/app.js') }}"></script>
 </html>

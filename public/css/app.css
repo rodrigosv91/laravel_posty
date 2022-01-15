@@ -415,6 +415,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.block {
+  display: block;
+}
 .inline {
   display: inline;
 }
@@ -444,6 +447,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .rounded {
   border-radius: 0.25rem;
+}
+.border {
+  border-width: 1px;
 }
 .border-2 {
   border-width: 2px;
@@ -480,6 +486,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-3 {
   padding: 0.75rem;
+}
+.p-2\.5 {
+  padding: 0.625rem;
+}
+.p-2 {
+  padding: 0.5rem;
 }
 .px-4 {
   padding-left: 1rem;

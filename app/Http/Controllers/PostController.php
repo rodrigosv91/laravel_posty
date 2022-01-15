@@ -72,4 +72,27 @@ class PostController extends Controller
 
         return back();
     }
+
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'search' => 'required',
+        ]);
+
+        $search = $request->input('search');
+
+        //$posts = Post::latest()->where('body', 'LIKE', "%{$search}%")->paginate(20);  //search only posts     
+
+        $posts = Post::latest('posts.created_at')
+        ->join('users', function ($join) {
+            $join->on('users.id', '=', 'posts.user_id');
+        }) 
+        ->orwhere('body', 'LIKE', "%{$search}%")
+        ->orWhere('name', 'LIKE', "%{$search}%")
+        ->paginate(20); 
+
+        return view('posts.search', [
+            'posts' => $posts
+        ]);
+    }
 }
